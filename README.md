@@ -13,4 +13,5 @@ This repository contains a sample authentication application built with Express.
 Once the server is running, you can access the API endpoints to handle authentication:
 
 /auth/login: Endpoint for user authentication.
+
 /protected: Access protected route
