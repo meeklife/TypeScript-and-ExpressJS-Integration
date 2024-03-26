@@ -39,6 +39,10 @@ let LoginController = class LoginController {
         }
     }
     ;
+    getLogout(req, res) {
+        req.session = undefined;
+        res.redirect('/');
+    }
 };
 __decorate([
     (0, routes_1.get)('/login'),
@@ -53,6 +57,12 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], LoginController.prototype, "postLogin", null);
+__decorate([
+    (0, routes_1.get)('/logout'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "getLogout", null);
 LoginController = __decorate([
     (0, controller_1.controller)('/auth')
 ], LoginController);
