@@ -11,10 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const routes_1 = require("./decorators/routes");
 const controller_1 = require("./decorators/controller");
+const BodyValidator_1 = require("./decorators/BodyValidator");
 let LoginController = class LoginController {
     getLogin(req, res) {
         res.send(`
-            <form method="POST" action="/login">
+            <form method="POST">
                 <div>
                     <label>Email</label>
                     <input type="text" name="email"/>
@@ -27,6 +28,17 @@ let LoginController = class LoginController {
             </form>
         `);
     }
+    postLogin(req, res) {
+        const { email, password } = req.body;
+        if (email && password && email === 'baah@mail.com' && password === 'baah') {
+            req.session = { loggedIn: true };
+            res.redirect('/');
+        }
+        else {
+            res.send('Invalid Email');
+        }
+    }
+    ;
 };
 __decorate([
     (0, routes_1.get)('/login'),
@@ -34,6 +46,13 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], LoginController.prototype, "getLogin", null);
+__decorate([
+    (0, routes_1.post)('/login'),
+    (0, BodyValidator_1.BodyValidator)('email', 'password'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "postLogin", null);
 LoginController = __decorate([
     (0, controller_1.controller)('/auth')
 ], LoginController);

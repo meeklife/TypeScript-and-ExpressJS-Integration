@@ -9,7 +9,12 @@ const requireAuth = (req: Request, res: Response, next: NextFunction): void =>{
         next();
         return;
     }
-    res.status(403).send('Not permitted, Please login before')
+    res.status(403).send(`
+        <div>
+            <h1>Not permitted, Please login before</h1>
+            <a href='/auth/login'>login</a>
+        </div>
+    `)
 }
 
 const router = Router();
@@ -50,16 +55,16 @@ router.get('/', (req: Request, res: Response) => {
 //     `)
 // })
 
-router.post('/login', (req: RequestWithBody, res: Response) => {
-    const { email, password } = req.body 
+// router.post('/login', (req: RequestWithBody, res: Response) => {
+//     const { email, password } = req.body 
     
-    if (email && password && email === 'baah@mail.com' && password === 'baah') {
-        req.session = {loggedIn: true}
-        res.redirect('/')
-    } else {
-        res.send('Invalid Email')
-    }
-})
+//     if (email && password && email === 'baah@mail.com' && password === 'baah') {
+//         req.session = {loggedIn: true}
+//         res.redirect('/')
+//     } else {
+//         res.send('Invalid Email')
+//     }
+// })
 
 router.get('/logout', (req: Request, res: Response) => {
     req.session = undefined

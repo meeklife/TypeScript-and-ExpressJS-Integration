@@ -12,7 +12,7 @@ function bodyValidator(keys) {
         }
         for (let key of keys) {
             if (!req.body[key]) {
-                res.status(422).send('Invalid Request');
+                res.status(422).send(`Missing the property ${key}`);
                 return;
             }
         }
